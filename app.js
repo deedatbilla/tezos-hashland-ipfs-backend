@@ -1,5 +1,5 @@
 const express = require("express");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 const Router = require("./router");
 const app = express();
 var cors = require("cors");

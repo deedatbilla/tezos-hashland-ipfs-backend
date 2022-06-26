@@ -15,18 +15,18 @@ const storage = multer.diskStorage({
 });
 var upload = multer({
   // storage: storage,
-  fileFilter: (req, file, cb) => {
-    if (
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg"
-    ) {
-      cb(null, true);
-    } else {
-      cb(null, false);
-      return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
-    }
-  },
+  // fileFilter: (req, file, cb) => {
+  //   if (
+  //     file.mimetype == "image/png" ||
+  //     file.mimetype == "image/jpg" ||
+  //     file.mimetype == "image/jpeg"
+  //   ) {
+  //     cb(null, true);
+  //   } else {
+  //     cb(null, false);
+  //     return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+  //   }
+  // },
 });
 router.get("/", (req, res) => {
   res.send({ message: "hi" });
@@ -53,15 +53,15 @@ router.post("/get-file-hash", upload.single("document"), async (req, res) => {
 router.get("/get-file/:hash", async (req, res) => {
   // Create a new user
   try {
-    const {hash}=req.params
+    const { hash } = req.params;
 
     ipfs.files.get(hash, function (err, files) {
       files.forEach((file) => {
-        console.log(file.path)
+        console.log(file.path);
         // console.log(file.content.toString('utf8'))
-      })
-    })
-    res.status(201).send({ file:"" });
+      });
+    });
+    // res.status(201).send({ fileUrl: `https://ipfs.io/ipfs/${}` });
   } catch (error) {
     console.log(error);
     res.status(400).send(error);
