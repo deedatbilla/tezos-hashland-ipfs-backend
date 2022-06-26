@@ -6,7 +6,12 @@ var cors = require("cors");
 app.use(express.json());
 app.use(cors());
 app.use(Router);
-
+// Enable CORS for all methods
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
 app.use((req, res, next) => {
   // Error goes via `next()` method
   setImmediate(() => {
