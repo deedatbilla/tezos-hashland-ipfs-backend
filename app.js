@@ -4,7 +4,7 @@ const Router = require("./router");
 const app = express();
 var cors = require("cors");
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(Router);
 // Enable CORS for all methods
 app.use(function (req, res, next) {
